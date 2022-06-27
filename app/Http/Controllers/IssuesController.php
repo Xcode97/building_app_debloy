@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Issue;
 use App\Mail\IssueRequestSubmitted;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Auth;
 
 class IssuesController extends Controller
@@ -42,5 +43,11 @@ class IssuesController extends Controller
 
     public function test(){
         return "This is a test function";
+    }
+
+    public function importFromExcel(Request $request) 
+    {
+        Excel::import(new IssuesImport, $request->excelFile);
+        
     }
 }
